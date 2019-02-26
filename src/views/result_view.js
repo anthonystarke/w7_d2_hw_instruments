@@ -12,21 +12,19 @@ ResultView.prototype.bindEvents = function () {
   });
 };
 
+ResultView.prototype.buildElement = function (element,content,parent) {
+  const newItem = document.createElement(element);
+  newItem.textContent = content;
+  parent.appendChild(newItem);
+};
+
 ResultView.prototype.buildItemSpec = function (instrumentData) {
   const detailSelector = document.querySelector('#instrument-details');
   detailSelector.innerHTML = "";
 
-  const newHeader = document.createElement('h2');
-  newHeader.textContent = instrumentData.name;
-  detailSelector.appendChild(newHeader);
-
-  const newParagraph = document.createElement('p');
-  newParagraph.textContent = instrumentData.description;
-  detailSelector.appendChild(newParagraph);
-
-  const newSubHeader = document.createElement('h3');
-  newSubHeader.textContent = "Instruments Include:";
-  detailSelector.appendChild(newSubHeader);
+  this.buildElement('h2',instrumentData.name,detailSelector);
+  this.buildElement('p',instrumentData.description,detailSelector);
+  this.buildElement('h3',"Instruments Include:",detailSelector);
 
   const newList = document.createElement('ul');
   detailSelector.appendChild(newList);
