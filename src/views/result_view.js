@@ -18,6 +18,14 @@ ResultView.prototype.buildElement = function (element,content,parent) {
   parent.appendChild(newItem);
 };
 
+ResultView.prototype.buildElementList = function (listItems,parent) {
+  listItems.forEach(function(item){
+    const newListItem = document.createElement('li');
+    newListItem.textContent = item;
+    parent.appendChild(newListItem);
+  });
+};
+
 ResultView.prototype.buildItemSpec = function (instrumentData) {
   const detailSelector = document.querySelector('#instrument-details');
   detailSelector.innerHTML = "";
@@ -29,14 +37,8 @@ ResultView.prototype.buildItemSpec = function (instrumentData) {
   const newList = document.createElement('ul');
   detailSelector.appendChild(newList);
 
-  const listItem = instrumentData.instruments;
-
-  listItem.forEach(function(item){
-    console.log(item);
-    const newListItem = document.createElement('li');
-    newListItem.textContent = item;
-    newList.appendChild(newListItem);
-  });
+  const listItems = instrumentData.instruments;
+  this.buildElementList(listItems,newList)
 
 };
 
